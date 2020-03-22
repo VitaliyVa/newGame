@@ -43,10 +43,14 @@ var grav = 1.5;
 
 // при нажатті на кнопку
 document.addEventListener("keydown", moveUp);
+document.addEventListener("click", moveUp);
+
 
 function moveUp() {
     yPos -= 25;
-    fly.play();
+    fly.pause()
+    fly.currentTime = 0
+    fly.play()
 }
  
 function draw() {
@@ -69,8 +73,9 @@ function draw() {
         if(xPos + bird.width >= pipe[i].x
             && xPos <= pipe[i].x + pipeUp.width
             && (yPos <= pipe[i].y + pipeUp.height
-            || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
-            location.reload(); // Перезагрузка страницы
+            || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height || yPos <= 0) {
+            
+                location.reload(); // Перезагрузка страницы
         }
 
         // рахунок
